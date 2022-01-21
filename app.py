@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, jsonify, Response
-
+from detector import Detective
 import os
 import cv2
 
@@ -19,11 +19,13 @@ def gen_frames():
         if not success:
             break
         else:
+            # Detective.detect(frame)
 
             ret, buffer = cv2.imencode('.jpg', frame)
             frame = buffer.tobytes()
             yield (b'--frame\r\n'
                    b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')  # concat frame one by one and show result
+
 
 def gen_ip_frames(ipadd):
     # rtsp://username:password@ip_address:554/user=username_password='password'_channel=channel_number_stream=0.sdp'
@@ -38,7 +40,7 @@ def gen_ip_frames(ipadd):
         if not success:
             break
         else:
-
+            # Detective.detect(frame)
             ret, buffer = cv2.imencode('.jpg', frame)
             frame = buffer.tobytes()
             yield (b'--frame\r\n'
@@ -57,8 +59,11 @@ def localcam():
    return Response(gen_frames(), mimetype="multipart/x-mixed-replace; boundary=frame")
 
 
-@app.route('/ipcam/<ipadd>')
-def ipcam(ipadd):
+@app.route('/ipcam', methods=['POST'])
+def ipcam():
+    ipadd = request.form['ip']
+    print('got ip')
+    print(ipadd)
     return Response(gen_ip_frames(ipadd), mimetype="multipart/x-mixed-replace; boundary=frame")
 
 @app.route('/webcam')
