@@ -449,29 +449,12 @@ history = model.fit(np.array(data[0:750]), np.array(target[0:750]), epochs=epoch
 
 result = model.evaluate(np.array(data_test), np.array(target_test))
 
+pickle.dump(model, open('model.pkl','wb'))
+
+model.save('model')
 
 for name, value in zip(model.metrics_names, result):
     print(name, value)
-
-
-
-plt.plot(history.history['acc'])
-plt.plot(history.history['val_acc'])
-plt.title('model accuracy')
-plt.ylabel('accuracy')
-plt.xlabel('epoch')
-plt.legend(['train', 'validation'], loc='upper left')
-plt.savefig('destination_path.eps', format='eps', dpi=1000)
-plt.show()
-# summarize history for loss
-plt.plot(history.history['loss'])
-plt.plot(history.history['val_loss'])
-plt.title('model loss')
-plt.ylabel('loss')
-plt.xlabel('epoch')
-plt.legend(['train', 'validation'], loc='upper left')
-plt.savefig('destination_path1.eps', format='eps', dpi=1000)
-plt.show()
 
 
 
