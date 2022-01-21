@@ -1,0 +1,105 @@
+{
+  "id": "/subscriptions/35e158f6-c62f-4777-9f06-76590a652f0e/resourceGroups/VYD_Group/providers/Microsoft.Resources/deployments/Microsoft.Web-WebApp-Portal-b795bf12-b2d5",
+  "name": "Microsoft.Web-WebApp-Portal-b795bf12-b2d5",
+  "type": "Microsoft.Resources/deployments",
+  "tags": {
+    "primaryResourceId": "/subscriptions/35e158f6-c62f-4777-9f06-76590a652f0e/resourcegroups/VYD_Group/providers/Microsoft.Web/sites/AnThuk",
+    "marketplaceItemId": "Microsoft.WebSite",
+    "provisioningHash": "customize-post-provisioning-steps-webapp-deployment"
+  },
+  "properties": {
+    "templateHash": "14097810064626847044",
+    "parameters": {
+      "subscriptionId": {
+        "type": "String",
+        "value": "35e158f6-c62f-4777-9f06-76590a652f0e"
+      },
+      "name": {
+        "type": "String",
+        "value": "AnThuk"
+      },
+      "location": {
+        "type": "String",
+        "value": "Australia Central"
+      },
+      "hostingPlanName": {
+        "type": "String",
+        "value": "ASP-VYDGroup-9e86"
+      },
+      "serverFarmResourceGroup": {
+        "type": "String",
+        "value": "VYD_Group"
+      },
+      "alwaysOn": {
+        "type": "Bool",
+        "value": false
+      },
+      "sku": {
+        "type": "String",
+        "value": "Free"
+      },
+      "skuCode": {
+        "type": "String",
+        "value": "F1"
+      },
+      "workerSize": {
+        "type": "String",
+        "value": "0"
+      },
+      "workerSizeId": {
+        "type": "String",
+        "value": "0"
+      },
+      "numberOfWorkers": {
+        "type": "String",
+        "value": "1"
+      },
+      "linuxFxVersion": {
+        "type": "String",
+        "value": "PYTHON|3.9"
+      }
+    },
+    "mode": "Incremental",
+    "debugSetting": {
+      "detailLevel": "None"
+    },
+    "provisioningState": "Running",
+    "timestamp": "2022-01-21T07:27:53.8382614Z",
+    "duration": "PT1.3655169S",
+    "correlationId": "ba304bfd-da3c-4173-93c0-e32f74c6dbc4",
+    "providers": [
+      {
+        "namespace": "Microsoft.Web",
+        "resourceTypes": [
+          {
+            "resourceType": "sites",
+            "locations": [
+              "australiacentral"
+            ]
+          },
+          {
+            "resourceType": "serverfarms",
+            "locations": [
+              "australiacentral"
+            ]
+          }
+        ]
+      }
+    ],
+    "dependencies": [
+      {
+        "dependsOn": [
+          {
+            "id": "/subscriptions/35e158f6-c62f-4777-9f06-76590a652f0e/resourceGroups/VYD_Group/providers/Microsoft.Web/serverfarms/ASP-VYDGroup-9e86",
+            "resourceType": "Microsoft.Web/serverfarms",
+            "resourceName": "ASP-VYDGroup-9e86"
+          }
+        ],
+        "id": "/subscriptions/35e158f6-c62f-4777-9f06-76590a652f0e/resourceGroups/VYD_Group/providers/Microsoft.Web/sites/AnThuk",
+        "resourceType": "Microsoft.Web/sites",
+        "resourceName": "AnThuk"
+      }
+    ],
+    "validationLevel": "Template"
+  }
+}
