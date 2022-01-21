@@ -14,6 +14,8 @@ from keras.layers import Dense, Activation
 import sys
 import h5py
 import zipfile
+import pickle
+import shutil
 
 
 def print_progress(count, max_count):
@@ -451,7 +453,13 @@ result = model.evaluate(np.array(data_test), np.array(target_test))
 
 pickle.dump(model, open('model.pkl','wb'))
 
-model.save('model')
+model.save('wholemodel')
+
+zip_name = 'wholemodel'
+directory_name = 'wholemodel'
+
+# Create 'path\to\zip_file.zip'
+shutil.make_archive(zip_name, 'zip', directory_name)
 
 for name, value in zip(model.metrics_names, result):
     print(name, value)

@@ -25,6 +25,26 @@ def gen_frames():
             yield (b'--frame\r\n'
                    b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')  # concat frame one by one and show result
 
+def gen_ip_frames(ipadd):
+    # rtsp://username:password@ip_address:554/user=username_password='password'_channel=channel_number_stream=0.sdp'
+    # RTSP_URL = 'rtsp://192.168.0.101:8080/h264_ulaw.sdp'
+    RTSP_URL = 'rtsp://'+ipadd+'/h264_ulaw.sdp'
+
+    os.environ['OPENCV_FFMPEG_CAPTURE_OPTIONS'] = 'rtsp_transport;udp'
+
+    webcam = cv2.VideoCapture(RTSP_URL, cv2.CAP_FFMPEG)
+    while True:
+        success, frame = webcam.read()  # read the camera frame
+        if not success:
+            break
+        else:
+
+            ret, buffer = cv2.imencode('.jpg', frame)
+            frame = buffer.tobytes()
+            yield (b'--frame\r\n'
+                   b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')  # concat frame one by one and show result
+
+
 
 @app.route('/')
 def index():
@@ -33,8 +53,13 @@ def index():
 
 @app.route('/localcam')
 def localcam():
-    return Response(gen_frames(), mimetype="multipart/x-mixed-replace; boundary=frame")
+   # return render_template('localcam.html',gen_frames = gen_frames,Response = Response )
+   return Response(gen_frames(), mimetype="multipart/x-mixed-replace; boundary=frame")
 
+
+@app.route('/ipcam/<ipadd>')
+def ipcam(ipadd):
+    return Response(gen_ip_frames(ipadd), mimetype="multipart/x-mixed-replace; boundary=frame")
 
 @app.route('/webcam')
 def webcam():
